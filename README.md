@@ -1,5 +1,9 @@
 >[Link Course](https://www.udemy.com/course/viet-ung-dung-ban-hang-voi-java-springbootapi-va-angular/)
 
+# Course: Practical, Building an E-commerce Application with Java Springboot API and Angular
+
+This course will guide you in learning how to create a complete real-world web application from start to finish, encompassing both the back-end and front-end.
+
 # Course Content
 
 1. **Building a Complete Web Application**
@@ -43,6 +47,13 @@ The course "Practical, Building an E-commerce Application with Java Springboot A
 
 Upon completion of this course, students will have the knowledge and skills to build a complete web application with Java Springboot API and Angular, meeting the requirements of a real-world e-commerce application.
 
+## Knowledge You Will Acquire:
+
+- Ability to build a complete real-world web application from start to finish, combining the back-end with Java Springboot API and the front-end with Angular.
+- Capability to develop a RESTful API with Java Springboot from scratch, including basic features such as login, registration, and management of products and orders.
+- Understanding of security technologies related to building RESTful APIs such as JWT, Spring Security, and OAuth 2.0, along with methods to integrate them into real-world projects.
+- Proficiency in using Angular to create user interfaces for web applications, integrating with the built RESTful API to display product information and manage orders.
+
 ## Target Audience:
 
 - Web developers looking to learn new skills in building a complete web application from start to finish.
@@ -51,6 +62,10 @@ Upon completion of this course, students will have the knowledge and skills to b
 
 
 ---
+
+# Khóa Học: Thực Chiến, Xây Dựng Ứng Dụng Bán Hàng với Java Springboot API và Angular
+
+Khóa học này sẽ giúp bạn học cách tạo một ứng dụng web thực tế hoàn chỉnh từ đầu đến cuối, bao gồm cả phía back-end và front-end.
 
 # Nội Dung Bài Học
 
@@ -94,6 +109,13 @@ Khóa học "Thực Chiến, Xây Dựng Ứng Dụng Bán Hàng với Java Spri
 ## Mục Tiêu Sau Khóa Học:
 
 Sau khi hoàn thành khóa học này, học viên sẽ có kiến thức và kỹ năng để xây dựng một ứng dụng web hoàn chỉnh với Java Springboot API và Angular, đáp ứng được các yêu cầu của một ứng dụng bán hàng thực tế.
+
+## Những Kiến Thức Bạn Sẽ Học:
+
+- Có khả năng xây dựng một ứng dụng web thực tế hoàn chỉnh từ đầu đến cuối, kết hợp giữa phần back-end với Java Springboot API và phần front-end với Angular
+- Có khả năng xây dựng một RESTful API với Java Springboot từ đầu đến cuối, bao gồm các tính năng cơ bản như đăng nhập, đăng ký và quản lý sản phẩm và đơn hàng
+- Hiểu rõ về các công nghệ an toàn liên quan đến việc xây dựng RESTful API như JWT, Spring Security và OAuth 2.0, phương pháp để tích hợp vào các dự án thực tế
+- Thành thạo sử dụng Angular để tạo giao diện người dùng cho ứng dụng web, kết hợp với RESTful API đã xây dựng để hiển thị thông tin sản phẩm và quản lý đơn hàng
 
 ## Đối Tượng Học:
 
