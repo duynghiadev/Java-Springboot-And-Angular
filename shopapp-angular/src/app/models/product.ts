@@ -9,6 +9,6 @@ export interface Product {
   category_id: number;
   url: string;
   product_images: ProductImage[];
-} 
+}
 
 

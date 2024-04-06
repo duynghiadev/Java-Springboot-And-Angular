@@ -15,4 +15,4 @@ export class RoleService {
   getRoles(): Observable<any> {
     return this.http.get<any[]>(this.apiGetRoles)
   }
-} 
+}

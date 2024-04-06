@@ -12,4 +12,4 @@ export class UpdateCategoryDTO {
   constructor(data: any) {
     this.name = data.name
   }
-} 
+}
