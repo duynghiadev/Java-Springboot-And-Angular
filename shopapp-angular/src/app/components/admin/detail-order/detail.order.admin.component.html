@@ -1,0 +1,56 @@
+<h1>This is detail order admin</h1>
+<div class="container">
+  <h1>Order Details</h1>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Order Information</h3>
+      <p><strong>Order ID:</strong> {{ orderResponse.id }}</p>
+      <p><strong>User ID:</strong> {{ orderResponse.user_id }}</p>
+      <p><strong>Full Name:</strong> {{ orderResponse.fullname }}</p>
+      <p><strong>Phone Number:</strong> {{ orderResponse.phone_number }}</p>
+      <p><strong>Email:</strong> {{ orderResponse.email }}</p>
+      <p><strong>Address:</strong> {{ orderResponse.address }}</p>
+      <p><strong>Note:</strong> {{ orderResponse.note }}</p>
+      <p><strong>Order Date:</strong> {{ orderResponse.order_date | date }}</p>
+      
+      <div class="form-group">
+        <label for="statusSelect"><strong>Status:</strong></label>
+        <select class="form-control" id="statusSelect" 
+          [(ngModel)]="orderResponse.status">
+          <option value="pending">Pending</option>
+          <option value="processing">Processing</option>
+          <option value="shipped">Shipped</option>
+          <option value="delivered">Delivered</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>          
+  </div>  
+  <h3>Order Details</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <!--<th>Total</th>-->
+      </tr>
+    </thead>
+    <tbody>
+      @for(order_detail of orderResponse.order_details; 
+        track order_detail.product.name) {
+          <tr>
+            <td>{{ order_detail.product.name }}</td>
+            <td>
+              <p>{{order_detail.product.price}}</p>          
+            <td>
+              <p>{{order_detail.number_of_products}}</p>          
+            </td>
+            <!--<td>{{ order_detail.total_money }}</td>-->
+          </tr>
+      }      
+    </tbody>
+  </table>  
+  <button class="btn btn-primary col-md-2" 
+    (click)="saveOrder()">Save</button>
+</div>
