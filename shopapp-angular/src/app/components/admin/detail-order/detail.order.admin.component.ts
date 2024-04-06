@@ -12,7 +12,6 @@ import { OrderDTO } from '../../../dtos/order/order.dto'
 import { OrderResponse } from '../../../responses/order/order.response'
 import { OrderService } from '../../../services/order.service'
 
-
 @Component({
   selector: 'app-detail-order-admin',
   templateUrl: './detail.order.admin.component.html',

@@ -19,7 +19,6 @@ import { FooterComponent } from '../footer/footer.component'
 import { CommonModule } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-
 @Component({
   selector: 'user-profile',
   templateUrl: './user.profile.component.html',
