@@ -1,0 +1,137 @@
+version: '3.7'
+
+services:
+  zookeeper-01:
+    image: confluentinc/cp-zookeeper:7.5.3
+    hostname: zookeeper-01
+    container_name: zookeeper-01
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_SERVER_ID: 1
+      #Định nghĩa danh sách các máy chủ Zookeeper trong cluster, bao gồm chính zookeeper-01 và hai máy chủ khác zookeeper-02 và zookeeper-03
+      ZOOKEEPER_SERVERS: zookeeper-01:2888:3888;zookeeper-02:2888:3888;zookeeper-03:2888:3888
+      #2888: Port được sử dụng cho giao tiếp giữa các máy chủ Zookeeper
+      #3888: Port được sử dụng cho giao tiếp giữa các client và máy chủ Zookeeper.
+
+    networks:
+      - shopapp-network
+
+  zookeeper-02:
+    image: confluentinc/cp-zookeeper:7.5.3
+    hostname: zookeeper-02
+    container_name: zookeeper-02
+    ports:
+      - "2182:2182"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2182
+      ZOOKEEPER_SERVER_ID: 2
+      ZOOKEEPER_SERVERS: zookeeper-01:2888:3888;zookeeper-02:2888:3888;zookeeper-03:2888:3888
+    networks:
+      - shopapp-network
+
+  zookeeper-03:
+    image: confluentinc/cp-zookeeper:7.5.3
+    hostname: zookeeper-03
+    container_name: zookeeper-03
+    ports:
+      - "2183:2183"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2183
+      ZOOKEEPER_SERVER_ID: 3
+      ZOOKEEPER_SERVERS: zookeeper-01:2888:3888;zookeeper-02:2888:3888;zookeeper-03:2888:3888
+    networks:
+      - shopapp-network  
+
+  kafka-broker-01:
+    image: confluentinc/cp-kafka:7.5.3
+    hostname: kafka-broker-01
+    container_name: kafka-broker-01
+    ports:
+      - "9092:9092" #Cho phép truy cập giao tiếp client với Kafka qua port 9092 trên máy chủ
+      - "29092:29092" #Cho phép giao tiếp giữa các broker Kafka trong cluster
+      - "9999:9999" #Cho phép truy cập JMX (Java Management Extensions) của Kafka qua port 9999 trên máy chủ
+    environment:
+      #Định nghĩa các listener của Kafka và địa chỉ truy cập
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-broker-01:19092,EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092,DOCKER://host.docker.internal:29092
+      #INTERNAL://kafka-broker-01:19092: Listener nội bộ cho giao tiếp giữa các container Kafka
+      #EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092: Listener bên ngoài cho phép client bên ngoài truy cập Kafka thông qua port 9092 trên máy chủ
+      #DOCKER://host.docker.internal:29092: Listener cho phép giao tiếp giữa các container Kafka trong cluster docker
+
+      #Thiết lập giao thức bảo mật cho từng listener, trong trường hợp này tất cả đều dùng PLAINTEXT (không mã hóa).
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,DOCKER:PLAINTEXT      
+
+      #Xác định listener dùng cho giao tiếp giữa các broker Kafka, trong trường hợp này là INTERNAL
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper-01:2181,zookeeper-02:2182,zookeeper-03:2183"
+      KAFKA_BROKER_ID: 1
+
+      #Cấu hình mức độ log cho các thành phần của Kafka
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+
+      #Thiết lập số bản sao cho chủ đề offset trong Kafka
+      #topic "offset" lưu thông tin về vị trí đọc cuối cùng của mỗi consumer trong mỗi phân vùng của 1 Kafka topic
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+      #số bản sao cho chủ đề nhật ký trạng thái giao dịch (transaction state log) trong Kafka
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      #Chủ đề này lưu trữ thông tin về trạng thái của các giao dịch
+      #cho phép Kafka khôi phục giao dịch dang dở trong trường hợp broker gặp sự cố.
+
+      #Thiết lập số lượng broker tối thiểu phải xác nhận một bản ghi mới trong nhật ký 
+      #trạng thái giao dịch trước khi được coi là hoàn thành
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      #Giá trị này đảm bảo rằng dữ liệu giao dịch được lưu trữ trên đủ số broker
+
+      #Thiết lập port và hostname cho JMX của Kafka
+      KAFKA_JMX_PORT: 9999
+      KAFKA_JMX_HOSTNAME: ${DOCKER_HOST_IP:-127.0.0.1}
+      
+      KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
+
+      #Cho phép mọi người truy cập nếu không có ACL nào được tìm thấy
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
+
+    networks:
+      - shopapp-network
+    depends_on:
+      - zookeeper-01
+      - zookeeper-02
+      - zookeeper-03
+  kafka-broker-02:
+    image: confluentinc/cp-kafka:7.5.3
+    hostname: kafka-broker-02
+    container_name: kafka-broker-02
+    ports:
+      - "9093:9093"
+      - "29093:29093"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-broker-02:19093,EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9093,DOCKER://host.docker.internal:29093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,DOCKER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper-01:2181,zookeeper-02:2182,zookeeper-03:2183"
+      KAFKA_BROKER_ID: 2
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
+    depends_on:
+      - zookeeper-01
+      - zookeeper-02
+      - zookeeper-03
+networks:
+  shopapp-network:
+    name: shopapp-network
+    driver: bridge
+
+#docker-compose -f ./kafka-deployment.yaml rm -s -f zookeeper-01
+
+#docker-compose -f ./kafka-deployment.yaml up -d zookeeper-01
+#docker-compose -f ./kafka-deployment.yaml up -d zookeeper-02
+#docker-compose -f ./kafka-deployment.yaml up -d zookeeper-03
+
+#docker-compose -f ./kafka-deployment.yaml up -d kafka-broker-01
+#docker-compose -f ./kafka-deployment.yaml up -d kafka-broker-02
+
+

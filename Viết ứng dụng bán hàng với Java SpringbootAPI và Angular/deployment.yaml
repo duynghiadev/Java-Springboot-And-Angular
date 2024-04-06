@@ -1,0 +1,99 @@
+#scp -pr . root@103.124.93.29:/root/
+
+version: '3.7'
+services:
+  mysql8-container:
+    container_name: mysql8-container
+    image: mysql:8.2.0    
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Abc123456789@
+      MYSQL_DATABASE: ShopApp
+    ports:
+      - 3307:3306
+    #volumes: 
+    #- ./sql/shopapp.sql:/docker-entrypoint-initdb.d/init-script.sql
+    networks:
+      - shopapp-network  
+
+  phpmyadmin8-container:
+    #intel host
+    image: phpmyadmin/phpmyadmin
+    #mac m1 host
+    #image: arm64v8/phpmyadmin     
+    container_name: phpmyadmin8-container
+    restart: always
+    depends_on:
+      - mysql8-container      
+    ports:
+      - "8100:80" #port mapping
+    environment:
+      PMA_HOST: mysql8-container #phpMyAdmin Host, PMA = PHP My Amin
+    networks:
+      - shopapp-network
+  
+  redis-container:
+    image: docker.io/redis:7.2.3
+    container_name: redis-container
+    restart: always
+    ports:
+      - "6379:6379" # Port mapping for Redis, you can change the host port as needed
+    volumes:
+      - ./redis-data:/data # Mount a volume for Redis data persistence
+    networks:
+      - shopapp-network
+
+  #Nhớ chạy Kafka deployment trước, đảm bảo Broker và Zookeeper chạy ok
+  shopapp-spring-container:    
+    container_name: shopapp-spring-container    
+    build:
+      context: .
+      dockerfile: DockerfileJavaSpring      
+      #docker tag <image_id> shopapp-spring:1.0.0    
+    ports:
+      - 8099:8088
+    environment:
+      #SPRING_DATASOURCE_URL: jdbc:mysql://mysql8-container:3306/ShopApp?serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql8-container:3306/ShopApp?serverTimezone=UTC&allowPublicKeyRetrieval=true            
+      MYSQL_ROOT_PASSWORD: Abc123456789@
+      REDIS_HOST: redis-container
+      REDIS_PORT: 6379
+      #Kafka broker
+      KAFKA_BROKER_SERVER: kafka-broker-01      
+      KAFKA_BROKER_PORT: 19092
+    #depends_on only waits for the container to start, not for the service inside the container to be fully operational
+    depends_on:      
+      - mysql8-container
+    networks:
+      - shopapp-network    
+    healthcheck:
+      #test: ["CMD-SHELL", "curl --fail http://localhost:8088/healthcheck/health || exit 1"]
+      test: ["CMD-SHELL", "curl --fail http://localhost:8088/api/v1/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s #20s after container created, health check     
+    
+#docker-compose -f ./deployment.yaml down 
+
+#docker-compose -f ./deployment.yaml rm -s -f mysql8-container
+#docker-compose -f ./deployment.yaml up -d mysql8-container
+
+#docker-compose -f ./deployment.yaml rm -s -f phpmyadmin8-container
+#docker-compose -f ./deployment.yaml up -d phpmyadmin8-container
+
+
+#docker-compose -f ./deployment.yaml rm -s -f shopapp-spring-container 
+#docker-compose -f ./deployment.yaml up -d shopapp-spring-container 
+#docker logs shopapp-spring-container
+
+#docker-compose -f ./deployment.yaml rm -s -f redis-container
+#docker-compose -f ./deployment.yaml up -d redis-container
+
+networks:
+  shopapp-network:
+    name: shopapp-network
+    driver: bridge
+
+
+
