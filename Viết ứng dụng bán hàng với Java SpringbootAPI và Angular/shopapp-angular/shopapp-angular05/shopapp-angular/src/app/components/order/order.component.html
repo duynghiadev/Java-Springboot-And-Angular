@@ -1,0 +1,106 @@
+<app-header></app-header>
+<div class="container">
+    <div class="intro-section">
+        <h1>Đây là trang Order</h1>
+        <p>Sử dụng Bootstrap</p>
+    </div>    
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="product-header">Thông tin người nhận</h2>
+            <!-- <form> -->
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">Họ và tên</label>
+                    <input type="text" 
+                        [(ngModel)]="orderData.fullname"
+                        class="form-control" id="fullname">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" 
+                        [(ngModel)]="orderData.email" placeholder="Email"
+                        class="form-control" id="email">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Số điện thoại</label>
+                    <input type="text" 
+                        class="form-control" 
+                        [(ngModel)]="orderData.phone_number" placeholder="Số điện thoại" required
+                        id="phone">
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Địa chỉ</label>
+                    <input type="text" 
+                        class="form-control" 
+                        [(ngModel)]="orderData.address" placeholder="Địa chỉ" required
+                        id="address">
+                </div>
+                <div class="mb-3">
+                    <label for="note" class="form-label">Ghi chú</label>
+                    <input type="text" 
+                        class="form-control" 
+                        [(ngModel)]="orderData.note" placeholder="Ghi chú" required
+                        id="note">
+                </div>                
+                <div class="form-group">
+                    <label for="shippingMethod">Phương thức vận chuyển</label>
+                    <select class="form-control" id="shippingMethod" [(ngModel)]="orderData.shipping_method">
+                        <option value="express">Nhanh (Express)</option>
+                        <option value="normal">Thường (Normal)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="paymentMethod">Phương thức thanh toán</label>
+                    <select class="form-control" id="paymentMethod" [(ngModel)]="orderData.payment_method">
+                        <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                        <option value="other">Thanh toán khác</option>
+                    </select>
+                </div>
+            <!-- </form> -->
+        </div>
+        <div class="col-md-6">
+            <h2 class="product-order">Sản phẩm đã đặt hàng</h2>
+            <table>
+            <thead>
+                <tr>
+                    <th scope="col" class="text-start">Sản phẩm</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Đơn giá</th>
+                    <th scope="col">Tổng giá</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let item of cartItems">
+                    <tr>
+                        <td>
+                            <div class="product-info">
+                                <img [src]="item.product.thumbnail" alt="Product Image" class="product-image">
+                                <span class="product-name">{{ item.product.name }}</span>
+                            </div>
+                        </td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price | number:'1.2-2' }}</td>
+                        <td>{{ (item.product.price * item.quantity) | number:'1.2-2' }}</td>
+
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>   
+            <div class="text-start mt-3">
+                <h4 class="header-text text-end ">Tổng giá: {{ totalAmount | number:'1.2-2'}}</h4>
+            </div>
+            <div class="mt-3">
+                <h4 class="product-header">Nhập coupon</h4>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Nhập coupon">
+                    <button class="btn btn-gradient" type="button">Áp dụng</button>
+                </div>
+            </div>            
+            <div class="text-start mt-3">
+                <button 
+                    (click)="placeOrder()"
+                    class="btn btn-gradient" type="button">Đặt hàng</button>
+            </div>
+        </div>
+    </div>    
+</div>
+<app-footer></app-footer>

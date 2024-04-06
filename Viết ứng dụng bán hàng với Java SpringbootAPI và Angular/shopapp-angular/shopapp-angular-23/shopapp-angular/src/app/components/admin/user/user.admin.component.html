@@ -1,0 +1,37 @@
+<h1>sss</h1>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>State</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        @for(user of users; track user.id) {
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.fullname }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.is_active ? 'Active' : 'Inactive' }}</td>
+            <td>{{ user.role.name }}</td>
+            <td>
+                <button class="btn" [ngClass]="{
+                        'btn-danger': user.is_active,
+                        'btn-success': !user.is_active
+                      }" (click)="toggleUserStatus(user)">
+                    {{ user.is_active ? 'Block User' : 'Unblock User' }}
+                </button>
+                <button class="btn btn-primary ms-2" (click)="resetPassword(user.id)">
+                    Reset Password
+                </button>
+            </td>
+        </tr>
+        }
+    </tbody>
+  </table>

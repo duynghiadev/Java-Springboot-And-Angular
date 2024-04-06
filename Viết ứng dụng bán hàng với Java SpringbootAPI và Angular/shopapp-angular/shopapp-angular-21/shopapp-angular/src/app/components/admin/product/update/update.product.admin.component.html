@@ -1,0 +1,67 @@
+@if(product) {
+<div>      
+    <!-- Form cập nhật thông tin sản phẩm -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h3>Update Product</h3>
+          <form (ngSubmit)="updateProduct()">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" id="name" [(ngModel)]="updatedProduct.name" name="name" class="form-control" required>
+            </div>
+      
+            <div class="form-group mb-3">
+              <label for="price">Price:</label>
+              <input type="text" id="price" [(ngModel)]="updatedProduct.price" 
+                name="price" class="form-control col-md-3" required>
+            </div>
+      
+            <div class="form-group mb-3">
+              <label for="description">Description:</label>
+              <textarea id="description" [(ngModel)]="updatedProduct.description" name="description" class="form-control" required></textarea>
+            </div>
+      
+            <div class="form-group mb-3">
+              <label for="category">Category:</label>
+              <select id="category" [(ngModel)]="updatedProduct.category_id" 
+              name="category" class="form-control" required>                
+                @for(category of categories; track category.id) {
+                  <option [value]="category.id">{{ category.name }}
+                  </option>
+                }                
+              </select>
+            </div>
+            Copy
+            <div class="row mb-3">
+              <div class="thumbnail-container">
+                @for(productImage of product.product_images;
+                  track productImage.image_url; let i = $index) {
+                    <div 
+                      class="thumbnail-item" 
+                      [ngClass]="{'active': i === currentImageIndex}"
+                      (click)="thumbnailClick(i)">
+                    <img [src]="productImage.image_url" class="thumbnail-image" 
+                      alt="Thumbnail Image">
+                    <button type="button" class="btn btn-sm remove-image" 
+                      (click)="deleteImage(productImage)">
+                      <i class="fa fa-times-circle text-danger"></i>
+                    </button>
+                  </div>
+                } @empty {
+                  <h2>No images found</h2>
+                }               
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="images">Add images (up to 5):</label>
+              <input type="file" id="images" name="images" 
+                multiple (change)="onFileChange($event)" accept="image/*">
+            </div>            
+            <button type="submit" class="btn btn-primary">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+}

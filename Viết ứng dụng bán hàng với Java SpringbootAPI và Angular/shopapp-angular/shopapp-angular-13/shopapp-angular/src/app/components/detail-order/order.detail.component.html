@@ -1,0 +1,68 @@
+<app-header></app-header>
+<div class="container">
+    <div class="intro-section">
+        <h1>Chi tiết đơn hàng</h1>
+        <p>Xem thông tin chi tiết đơn hàng</p>
+    </div>
+    
+    <!-- Thông tin người nhận -->
+    <div *ngIf="orderResponse" class="row">
+        <div class="col-md-6">
+            <h2 class="product-header">Thông tin người nhận</h2>
+            <div class="mb-3">
+                <p class="form-label">Họ và tên: {{ orderResponse.fullname }}</p>
+            </div>
+            <!-- Các trường thông tin khác -->
+            <div class="mb-3">
+                <p class="form-label">Email: {{ orderResponse.email }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="form-label">Số điện thoại: {{ orderResponse.phone_number }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="form-label">Địa chỉ: {{ orderResponse.address }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="form-label">Ghi chú: {{ orderResponse.note }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="form-label">Phương thức vận chuyển: {{ orderResponse.shipping_method }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="form-label">Phương thức thanh toán: {{ orderResponse.payment_method }}</p>
+            </div>                        
+        </div>
+
+        <!-- Sản phẩm đã đặt hàng -->
+        <div class="col-md-6">
+            <h2 class="product-order">Sản phẩm đã đặt hàng</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-start">Sản phẩm</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Tổng giá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of orderResponse.order_details">
+                        <td>
+                            <div class="product-info">
+                                <img [src]="item.product.thumbnail" alt="Product Image" class="product-image">
+                                <span class="product-name">{{ item.product.name }}</span>
+                            </div>
+                        </td>
+                        <td>{{ item.number_of_products }}</td>
+                        <td>{{ item.price | number:'1.2-2' }}</td>
+                        <td>{{ item.total_money | number:'1.2-2' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-start mt-3">
+                <h4 class="header-text text-end">Tổng giá: {{ orderResponse.total_money | number:'1.2-2' }}</h4>
+            </div>            
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

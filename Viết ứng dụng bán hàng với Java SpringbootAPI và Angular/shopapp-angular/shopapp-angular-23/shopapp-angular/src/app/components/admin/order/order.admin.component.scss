@@ -1,0 +1,28 @@
+@import '../../../styles/shared-styles.scss';
+
+.page-number {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    margin: 0 2px;
+    border-radius: 3px;
+}
+
+.page-number.active {
+    background-color: $shopapp-color !important;
+    color: #fff;
+    border-color: $shopapp-color !important;
+}
+
+.btn.btn-primary {
+    margin-left: 10px;
+}
+.container-fluid {
+    background-color: white;
+    padding-left: 0 !important; /* Remove left padding */
+    padding-right: 0 !important; /* Remove right padding */
+    height: 100vh;
+}
+.button-primary {
+    white-space: nowrap;
+}

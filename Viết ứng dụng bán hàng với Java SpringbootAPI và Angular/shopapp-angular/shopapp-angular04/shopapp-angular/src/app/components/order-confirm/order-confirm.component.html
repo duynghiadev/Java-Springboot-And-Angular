@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div class="container">
+    <div class="confirmation-container">
+        <h1>Xác nhận đơn hàng</h1>
+        <p>Cảm ơn bạn đã đặt hàng! Dưới đây là thông tin chi tiết về đơn hàng của bạn</p>     
+    </div>
+    <div class="row">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col" class="text-start">Sản phẩm</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Đơn giá</th>
+                    <th scope="col">Tổng giá</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let item of cartItems">
+                    <tr>
+                        <td>
+                            <div class="product-info">
+                                <img [src]="item.product.thumbnail" alt="Product Image" class="product-image">
+                                <span class="product-name">{{ item.product.name }}</span>
+                            </div>
+                        </td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price | currency:'VND':'symbol':'1.0-0' }}</td>
+                        <td>{{ (item.product.price * item.quantity) | currency:'VND':'symbol':'1.0-0' }}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>           
+    </div>    
+    <!-- Ô nhập mã giảm giá -->
+    <div class="input-group mb-3 mt-3 col-6">
+        <input type="text" class="form-control" 
+            [(ngModel)]="couponCode" placeholder="Mã giảm giá">
+        <div class="input-group-append" style="margin-left: 10px;">
+            <button class="btn btn-outline-secondary" type="button" (click)="applyCoupon()">Áp dụng mã</button>
+        </div>
+    </div>
+
+    <!-- Hiển thị tổng tiền sau khi áp dụng giảm giá -->
+    <p class="mb-0">Tổng tiền: {{ totalAmount | currency:'VND':'symbol':'1.0-0' }}</p>
+    <div class="text-center mt-3">
+        <button class="btn btn-gradient" type="button">Đặt hàng</button>
+    </div> 
+</div>
+<app-footer></app-footer>

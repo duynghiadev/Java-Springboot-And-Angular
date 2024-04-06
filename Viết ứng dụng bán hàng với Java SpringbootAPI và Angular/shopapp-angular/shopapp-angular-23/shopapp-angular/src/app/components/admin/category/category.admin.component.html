@@ -1,0 +1,39 @@
+<div class="container">
+    <h1>Category Admin</h1>        
+    <div class="row">
+      <div class="col-md-8 ">
+        <button class="btn btn-success" (click)="insertCategory()">Thêm danh mục mới</button>
+      </div>      
+    </div>
+    <table class="table">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>          
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>        
+        @for(category of categories; track category.id){
+          <tr>
+            <td>{{ category.id }}</td>
+            <td>{{ category.name }}</td>          
+            <td>
+              <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary" 
+                    (click)="updateCategory(category.id)">
+                  Update
+                </button>
+                <button class="btn btn-danger" 
+                  (click)="deleteCategory(category)">Delete
+                </button>            
+                </div>
+            </td>          
+          </tr>
+        } @empty {
+          <h2>No categories found</h2>
+        }
+        
+      </tbody>
+    </table>    
+  </div>
