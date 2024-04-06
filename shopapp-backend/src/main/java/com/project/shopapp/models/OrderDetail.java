@@ -12,33 +12,33 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class OrderDetail {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    @JsonBackReference
-    private Order order;
+  @ManyToOne
+  @JoinColumn(name = "order_id")
+  @JsonBackReference
+  private Order order;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+  @ManyToOne
+  @JoinColumn(name = "product_id")
+  private Product product;
 
-    @Column(name = "price", nullable = false)
-    private Float price;
+  @Column(name = "price", nullable = false)
+  private Float price;
 
-    @Column(name = "number_of_products", nullable = false)
-    private int numberOfProducts;
+  @Column(name = "number_of_products", nullable = false)
+  private int numberOfProducts;
 
-    @Column(name = "total_money", nullable = false)
-    private Float totalMoney;
+  @Column(name = "total_money", nullable = false)
+  private Float totalMoney;
 
-    @Column(name = "color")
-    private String color;
+  @Column(name = "color")
+  private String color;
 
-    @ManyToOne
-    @JoinColumn(name = "coupon_id")
-    @JsonBackReference
-    private Coupon coupon;
+  @ManyToOne
+  @JoinColumn(name = "coupon_id")
+  @JsonBackReference
+  private Coupon coupon;
 }

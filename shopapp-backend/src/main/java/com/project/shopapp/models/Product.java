@@ -17,34 +17,34 @@ import java.util.List;
 @Builder
 //Event-driven approach with Spring Data JPA
 @EntityListeners(ProductListener.class)
-public class Product extends BaseEntity{
+public class Product extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(name = "name", nullable = false, length = 350)
-    private String name;
+  @Column(name = "name", nullable = false, length = 350)
+  private String name;
 
-    private Float price;
+  private Float price;
 
-    @Column(name = "thumbnail", length = 300)
-    private String thumbnail;
+  @Column(name = "thumbnail", length = 300)
+  private String thumbnail;
 
-    @Column(name = "description")
-    private String description;
+  @Column(name = "description")
+  private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+  @ManyToOne
+  @JoinColumn(name = "category_id")
+  private Category category;
 
-    @OneToMany(mappedBy = "product",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    private List<ProductImage> productImages;
+  @OneToMany(mappedBy = "product",
+      cascade = CascadeType.ALL,
+      fetch = FetchType.LAZY)
+  private List<ProductImage> productImages;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Comment> comments = new ArrayList<>();
+  @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+  @JsonManagedReference
+  private List<Comment> comments = new ArrayList<>();
 
 }

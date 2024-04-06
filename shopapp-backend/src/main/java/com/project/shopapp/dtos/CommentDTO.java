@@ -17,12 +17,12 @@ import lombok.*;
 @NoArgsConstructor
 public class CommentDTO {
 
-    @JsonProperty("product_id")
-    private Long productId;
+  @JsonProperty("product_id")
+  private Long productId;
 
-    @JsonProperty("user_id")
-    private Long userId;
+  @JsonProperty("user_id")
+  private Long userId;
 
-    @JsonProperty("content")
-    private String content;
+  @JsonProperty("content")
+  private String content;
 }

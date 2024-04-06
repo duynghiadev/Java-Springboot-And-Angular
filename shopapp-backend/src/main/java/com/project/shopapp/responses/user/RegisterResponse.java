@@ -10,9 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class RegisterResponse {
-    @JsonProperty("message")
-    private String message;
+  @JsonProperty("message")
+  private String message;
 
-    @JsonProperty("user")
-    private User user;
+  @JsonProperty("user")
+  private User user;
 }

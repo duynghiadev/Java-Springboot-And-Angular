@@ -18,82 +18,84 @@ import java.util.*;
 @NoArgsConstructor
 @Builder
 public class User extends BaseEntity implements UserDetails, OAuth2User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(name = "fullname", length = 100)
-    private String fullName;
+  @Column(name = "fullname", length = 100)
+  private String fullName;
 
-    @Column(name = "phone_number", length = 10, nullable = false)
-    private String phoneNumber;
+  @Column(name = "phone_number", length = 10, nullable = false)
+  private String phoneNumber;
 
-    @Column(name = "address", length = 200)
-    private String address;
+  @Column(name = "address", length = 200)
+  private String address;
 
-    @Column(name = "password", length = 200, nullable = false)
-    private String password;
+  @Column(name = "password", length = 200, nullable = false)
+  private String password;
 
-    @Column(name = "is_active")
-    private boolean active;
+  @Column(name = "is_active")
+  private boolean active;
 
-    @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+  @Column(name = "date_of_birth")
+  private Date dateOfBirth;
 
-    @Column(name = "facebook_account_id")
-    private int facebookAccountId;
+  @Column(name = "facebook_account_id")
+  private int facebookAccountId;
 
-    @Column(name = "google_account_id")
-    private int googleAccountId;
+  @Column(name = "google_account_id")
+  private int googleAccountId;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private com.project.shopapp.models.Role role;
+  @ManyToOne
+  @JoinColumn(name = "role_id")
+  private com.project.shopapp.models.Role role;
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
-        authorityList.add(new SimpleGrantedAuthority("ROLE_"+getRole().getName().toUpperCase()));
-        //authorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+  @JsonManagedReference
+  private List<Comment> comments = new ArrayList<>();
 
-        return authorityList;
-    }
-    @Override
-    public String getUsername() {
-        return phoneNumber;
-    }
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
+    authorityList.add(new SimpleGrantedAuthority("ROLE_" + getRole().getName().toUpperCase()));
+    //authorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+    return authorityList;
+  }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+  @Override
+  public String getUsername() {
+    return phoneNumber;
+  }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
 
-    //Login facebook
-    @Override
-    public Map<String, Object> getAttributes() {
-        return null;
-    }
-    @Override
-    public String getName() {
-        return getAttribute("name");
-    }
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
 
-    @JsonManagedReference
-    private List<Comment> comments = new ArrayList<>();
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
+
+  //Login facebook
+  @Override
+  public Map<String, Object> getAttributes() {
+    return null;
+  }
+
+  @Override
+  public String getName() {
+    return getAttribute("name");
+  }
 }

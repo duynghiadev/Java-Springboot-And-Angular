@@ -63,7 +63,6 @@ public class WebSecurityConfig {
                   "/swagger-ui.html",
                   "/webjars/swagger-ui/**",
                   "/swagger-ui/index.html"
-
               )
               .permitAll()
               .requestMatchers(GET,

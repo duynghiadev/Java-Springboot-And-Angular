@@ -13,10 +13,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class RoleController {
-    private final RoleService roleService;
-    @GetMapping("")
-    public ResponseEntity<?> getAllRoles() {
-        List<Role> roles = roleService.getAllRoles();
-        return ResponseEntity.ok(roles);
-    }
+  private final RoleService roleService;
+
+  @GetMapping("")
+  public ResponseEntity<?> getAllRoles() {
+    List<Role> roles = roleService.getAllRoles();
+    return ResponseEntity.ok(roles);
+  }
 }

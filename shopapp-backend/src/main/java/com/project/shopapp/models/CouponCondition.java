@@ -19,26 +19,26 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class CouponCondition {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "coupon_id", nullable = false)
-    @JsonBackReference
-    private Coupon coupon;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "coupon_id", nullable = false)
+  @JsonBackReference
+  private Coupon coupon;
 
-    @Column(name = "attribute", nullable = false)
-    private String attribute;
+  @Column(name = "attribute", nullable = false)
+  private String attribute;
 
-    @Column(name = "operator", nullable = false)
-    private String operator;
+  @Column(name = "operator", nullable = false)
+  private String operator;
 
-    @Column(name = "value", nullable = false)
-    private String value;
+  @Column(name = "value", nullable = false)
+  private String value;
 
-    @Column(name = "discount_amount", nullable = false)
-    private BigDecimal discountAmount;
+  @Column(name = "discount_amount", nullable = false)
+  private BigDecimal discountAmount;
 }
 /*
 INSERT INTO coupons(id, code) VALUES (1, 'HEAVEN');

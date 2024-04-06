@@ -1,4 +1,5 @@
 package com.project.shopapp.dtos;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -9,6 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class RefreshTokenDTO {
-    @NotBlank
-    private String refreshToken;
+  @NotBlank
+  private String refreshToken;
 }

@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class CouponCalculationResponse {
-    @JsonProperty("result")
-    private Double result;
+  @JsonProperty("result")
+  private Double result;
 
-    //errorCode ?
-    @JsonProperty("errorMessage")
-    private String errorMessage;
+  //errorCode ?
+  @JsonProperty("errorMessage")
+  private String errorMessage;
 }

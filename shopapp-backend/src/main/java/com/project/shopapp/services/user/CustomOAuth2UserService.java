@@ -1,4 +1,5 @@
 package com.project.shopapp.services.user;
+
 import com.project.shopapp.models.User;
 import com.project.shopapp.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,13 +11,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CustomOAuth2UserService extends DefaultOAuth2UserService  {
-    private final UserRepository userRepository;
+public class CustomOAuth2UserService extends DefaultOAuth2UserService {
+  private final UserRepository userRepository;
 
-    @Override
-    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        OAuth2User user =  super.loadUser(userRequest);
-        return new User();
-    }
-
+  @Override
+  public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+    OAuth2User user = super.loadUser(userRequest);
+    return new User();
+  }
 }

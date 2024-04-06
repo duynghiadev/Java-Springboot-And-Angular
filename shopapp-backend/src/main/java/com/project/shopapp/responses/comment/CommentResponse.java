@@ -14,20 +14,21 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class CommentResponse {
-    @JsonProperty("content")
-    private String content;
+  @JsonProperty("content")
+  private String content;
 
-    //user's information
-    @JsonProperty("user")
-    private UserResponse userResponse;
+  //user's information
+  @JsonProperty("user")
+  private UserResponse userResponse;
 
-    @JsonProperty("updated_at")
-    private LocalDateTime updatedAt;
-    public static CommentResponse fromComment(Comment comment) {
-        return CommentResponse.builder()
-                .content(comment.getContent())
-                .userResponse(UserResponse.fromUser(comment.getUser()))
-                .updatedAt(comment.getUpdatedAt())
-                .build();
-    }
+  @JsonProperty("updated_at")
+  private LocalDateTime updatedAt;
+
+  public static CommentResponse fromComment(Comment comment) {
+    return CommentResponse.builder()
+        .content(comment.getContent())
+        .userResponse(UserResponse.fromUser(comment.getUser()))
+        .updatedAt(comment.getUpdatedAt())
+        .build();
+  }
 }

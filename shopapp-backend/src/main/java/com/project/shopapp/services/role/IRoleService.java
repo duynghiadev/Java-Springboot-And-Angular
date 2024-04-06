@@ -6,5 +6,5 @@ import com.project.shopapp.models.Role;
 import java.util.List;
 
 public interface IRoleService {
-    List<Role> getAllRoles();
+  List<Role> getAllRoles();
 }

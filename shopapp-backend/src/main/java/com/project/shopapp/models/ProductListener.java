@@ -11,47 +11,49 @@ Install Debezium and configure it to capture changes in the MySQL product table.
 
 Set up a Kafka Connect destination to consume the Debezium change data events.
 
-Implement a Spring Boot application that subscribes to the Kafka Connect destination and updates the Redis cache accordingly.
+Implement a Spring Boot application that subscribes to the Kafka Connect destination and updates
+the Redis cache accordingly.
 * */
 @AllArgsConstructor
 public class ProductListener {
-    private final IProductRedisService productRedisService;
-    private static final Logger logger = LoggerFactory.getLogger(ProductListener.class);
-    @PrePersist
-    public void prePersist(Product product) {
-        logger.info("prePersist");
-    }
+  private static final Logger logger = LoggerFactory.getLogger(ProductListener.class);
+  private final IProductRedisService productRedisService;
 
-    @PostPersist //save = persis
-    public void postPersist(Product product) {
-        // Update Redis cache
-        logger.info("postPersist");
-        productRedisService.clear();
-    }
+  @PrePersist
+  public void prePersist(Product product) {
+    logger.info("prePersist");
+  }
 
-    @PreUpdate
-    public void preUpdate(Product product) {
-        //ApplicationEventPublisher.instance().publishEvent(event);
-        logger.info("preUpdate");
-    }
+  @PostPersist //save = persis
+  public void postPersist(Product product) {
+    // Update Redis cache
+    logger.info("postPersist");
+    productRedisService.clear();
+  }
 
-    @PostUpdate
-    public void postUpdate(Product product) {
-        // Update Redis cache
-        logger.info("postUpdate");
-        productRedisService.clear();
-    }
+  @PreUpdate
+  public void preUpdate(Product product) {
+    //ApplicationEventPublisher.instance().publishEvent(event);
+    logger.info("preUpdate");
+  }
 
-    @PreRemove
-    public void preRemove(Product product) {
-        //ApplicationEventPublisher.instance().publishEvent(event);
-        logger.info("preRemove");
-    }
+  @PostUpdate
+  public void postUpdate(Product product) {
+    // Update Redis cache
+    logger.info("postUpdate");
+    productRedisService.clear();
+  }
 
-    @PostRemove
-    public void postRemove(Product product) {
-        // Update Redis cache
-        logger.info("postRemove");
-        productRedisService.clear();
-    }
+  @PreRemove
+  public void preRemove(Product product) {
+    //ApplicationEventPublisher.instance().publishEvent(event);
+    logger.info("preRemove");
+  }
+
+  @PostRemove
+  public void postRemove(Product product) {
+    // Update Redis cache
+    logger.info("postRemove");
+    productRedisService.clear();
+  }
 }

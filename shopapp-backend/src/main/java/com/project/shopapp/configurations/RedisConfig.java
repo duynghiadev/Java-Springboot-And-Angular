@@ -21,43 +21,44 @@ import java.time.format.DateTimeFormatter;
 
 @Configuration
 public class RedisConfig {
-    private static final Logger logger = LoggerFactory.getLogger(RedisConfig.class);
-    @Value("${spring.data.redis.host}") // Read 'spring.data.redis.host' property from application.yml
-    private String redisHost;
+  private static final Logger logger = LoggerFactory.getLogger(RedisConfig.class);
+  @Value("${spring.data.redis.host}") // Read 'spring.data.redis.host' property from application.yml
+  private String redisHost;
 
-    @Value("${spring.data.redis.port}") // Read 'spring.data.redis.port' property from application.yml
-    private int redisPort;
+  @Value("${spring.data.redis.port}") // Read 'spring.data.redis.port' property from application.yml
+  private int redisPort;
 
-    @Bean
-    public LettuceConnectionFactory redisConnectionFactory() {
-        logger.info(String.format("redisHost = %s, redisPort = %d", redisHost, redisPort));
-        RedisStandaloneConfiguration configuration =
-                new RedisStandaloneConfiguration(redisHost, redisPort);
-        return new LettuceConnectionFactory(configuration);
-    }
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate()
+  @Bean
+  public LettuceConnectionFactory redisConnectionFactory() {
+    logger.info(String.format("redisHost = %s, redisPort = %d", redisHost, redisPort));
+    RedisStandaloneConfiguration configuration =
+        new RedisStandaloneConfiguration(redisHost, redisPort);
+    return new LettuceConnectionFactory(configuration);
+  }
 
-    {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(redisConnectionFactory());
+  @Bean
+  public RedisTemplate<String, Object> redisTemplate() {
+    RedisTemplate<String, Object> template = new RedisTemplate<>();
+    template.setConnectionFactory(redisConnectionFactory());
 
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
+    template.setKeySerializer(new StringRedisSerializer());
+    template.setValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
 
-        template.setHashKeySerializer(new StringRedisSerializer());
-        template.setHashValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
-        template.afterPropertiesSet();
-        return template;
-    }
-    @Bean
-    public ObjectMapper redisObjectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        SimpleModule module = new SimpleModule();
-        module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ISO_DATE_TIME));
-        module.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ISO_DATE_TIME));
-        objectMapper.registerModule(module);
-        return objectMapper;
-    }
+    template.setHashKeySerializer(new StringRedisSerializer());
+    template.setHashValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
+    template.afterPropertiesSet();
+    return template;
+  }
+
+  @Bean
+  public ObjectMapper redisObjectMapper() {
+    ObjectMapper objectMapper = new ObjectMapper();
+    SimpleModule module = new SimpleModule();
+    module.addSerializer(LocalDateTime.class,
+        new LocalDateTimeSerializer(DateTimeFormatter.ISO_DATE_TIME));
+    module.addDeserializer(LocalDateTime.class,
+        new LocalDateTimeDeserializer(DateTimeFormatter.ISO_DATE_TIME));
+    objectMapper.registerModule(module);
+    return objectMapper;
+  }
 }
-

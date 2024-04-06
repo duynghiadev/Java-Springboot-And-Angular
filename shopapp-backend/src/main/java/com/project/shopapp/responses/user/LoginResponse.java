@@ -11,18 +11,18 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class LoginResponse {
-    @JsonProperty("message")
-    private String message;
+  @JsonProperty("message")
+  private String message;
 
-    @JsonProperty("token")
-    private String token;
+  @JsonProperty("token")
+  private String token;
 
-    @JsonProperty("refresh_token")
-    private String refreshToken;
-    private String tokenType = "Bearer";
-    //user's detail
-    private Long id;
-    private String username;
+  @JsonProperty("refresh_token")
+  private String refreshToken;
+  private String tokenType = "Bearer";
+  //user's detail
+  private Long id;
+  private String username;
 
-    private List<String> roles;
+  private List<String> roles;
 }

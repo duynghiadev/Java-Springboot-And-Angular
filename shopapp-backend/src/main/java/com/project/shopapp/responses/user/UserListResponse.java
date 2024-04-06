@@ -1,4 +1,5 @@
 package com.project.shopapp.responses.user;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 public class UserListResponse {
-    private List<UserResponse> users;
-    private int totalPages;
+  private List<UserResponse> users;
+  private int totalPages;
 }
