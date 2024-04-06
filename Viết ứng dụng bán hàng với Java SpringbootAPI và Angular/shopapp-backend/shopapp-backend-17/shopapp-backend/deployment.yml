@@ -1,0 +1,47 @@
+#run mvn install to create .jar file
+#scp -r /Users/hoangnd/Documents/code/udemy/ShopApp/shopapp-backend root@45.117.179.16:/root
+#scp -pr /Users/hoangnd/Documents/code/udemy/ShopApp/shopapp-backend/shopapp/src/main/resources/application.yml root@45.117.179.16:/root/shopapp-backend/shopapp/src/main/resources/
+#scp -pr /Users/hoangnd/Documents/code/udemy/ShopApp/shopapp-backend/deployment.yml root@45.117.179.16:/root/shopapp-backend/
+#scp -pr /Users/hoangnd/Documents/code/udemy/ShopApp/shopapp-backend/Dockerfile root@45.117.179.16:/root/shopapp-backend/
+
+version: '3.7'
+services:
+  shopapp-spring:    
+    container_name: shopapp-spring-container    
+    build:
+      context: .
+      dockerfile: Dockerfile      
+      #docker tag <image_id> shopapp-spring:1.0.0
+    ports:
+      - 8099:8080
+    environment:
+      #SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/ShopApp?serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/ShopApp?serverTimezone=UTC&allowPublicKeyRetrieval=true
+    depends_on:
+      - db
+    networks:
+      - shopapp-network
+
+  db:
+    container_name: mysql8-container
+    image: mysql:8.1.0    
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Abc123456789@
+      MYSQL_DATABASE: ShopApp
+    ports:
+      - 3307:3306
+    volumes: 
+      - ./sql/shopapp.sql:/docker-entrypoint-initdb.d/init-script.sql
+    networks:
+      - shopapp-network
+      
+networks:
+  shopapp-network:
+
+#docker-compose -f deployment.yml build app
+#docker-compose -f ./deployment.yml down
+#docker-compose -f ./deployment.yml up -d db
+#docker-compose -f ./deployment.yml up -d shopapp-spring
+#test container 
+#docker run -it --name openjdk-container maven:3.8.4-openjdk-17-slim

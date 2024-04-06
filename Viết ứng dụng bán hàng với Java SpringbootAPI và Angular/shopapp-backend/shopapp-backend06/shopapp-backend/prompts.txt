@@ -1,0 +1,37 @@
+tôi có 2 thực thể products và product_images, có quan hệ 1-n, trong product_images có trường product_id. Hãy viết lệnh sql trong mysql cho phép cập nhật trường thumbnail của bảng products là giá trị trường image_url của 1 trong các bản ghi của bảng product_images với products.id == product_images
+
+
+Thêm nút search vào phía bên phải thẻ input, khi bấm nút search sẽ tìm kiếm và trả về danh sách sản phẩm có paging
+
+<div class="search-box">
+        <input type="text" class="form-control search-input" placeholder="Tìm sản phẩm">
+        <select class="form-control product-category" [(ngModel)]="selectedCategory">
+            <option selected disabled>Danh mục sản phẩm</option>
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+        </select>
+    </div>    
+
+    getProducts(keyword: string, page: number, limit: number) {
+    this.productService.getProducts(keyword, page, limit).subscribe({
+      next: (response: any) => {
+        debugger
+        response.products.forEach((product: Product) => {          
+          product.url = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
+        });
+        this.products = response.products;
+        this.totalPages = response.totalPages;
+        this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
+      },
+      complete: () => {
+        debugger;
+      },
+      error: (error: any) => {
+        debugger;
+        console.error('Error fetching products:', error);
+      }
+    });    
+  }
+
+
+
+

@@ -1,0 +1,75 @@
+server:
+  port: 8088  
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3307/ShopApp?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: ${MYSQL_ROOT_PASSWORD:Abc123456789@}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none #chỗ này mà sửa thành drop-create thì rất nguy
+      #ddl-auto: validate
+      #Hibernate sẽ không tạo, sửa đổi hoặc xóa bất kỳ bảng, cột hay ràng buộc nào trong cơ sở dữ liệu
+      #validate thường được sử dụng trong môi trường production
+      #Nếu có sự khác biệt giữa cấu trúc cơ sở dữ liệu và các entity class
+      #lỗi sẽ được hiển thị và yêu cầu sửa đổi cấu trúc cơ sở dữ liệu một cách thủ công
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.MySQL8Dialect
+      format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+    default-locale: en
+  #flyway
+  # Đường dẫn tới thư mục chứa các script Flyway
+  flyway:
+    locations: classpath:/db/migration,classpath:/dev/db/migration
+    #Phiên bản baseline sẽ = 1 và không thực hiện bất kỳ thay đổi nào trong DB
+    baseline-on-migrate: true
+    baseline-version: 0
+  data:
+    redis:
+      #spring.data.redis.use-redis-cache
+      use-redis-cache: false
+      host: ${REDIS_HOST:localhost} # Default to 'localhost' if not provided
+      port: ${REDIS_PORT:6379}      # Default to 6379 if not provided
+api:
+  prefix: /api/v1
+jwt:
+  expiration: 2592000 #30 days = 30 * 24 * 60 * 60
+  expiration-refresh-token: 5184000 #60 days = 60 * 24 * 60 * 60
+  secretKey: TaqlmGv1iEDMRiFp/pHuID1+T84IABfuA0xXh4GhiUI=
+
+logging:
+  level:
+    org:
+      springframework.security: DEBUG
+
+# swagger-ui custom path
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs
+  show-actuator: true
+
+#health check
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      base-path: /api/v1/actuator
+      exposure:
+        #include: "health"
+        include: "health, info"
+
+
