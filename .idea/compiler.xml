@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="shopapp (21)" />
+        <module name="shopapp (11)" />
+        <module name="shopapp (23)" />
+        <module name="shopapp (13)" />
+        <module name="shopapp (25)" />
+        <module name="shopapp (15)" />
+        <module name="shopapp (27)" />
+        <module name="shopapp (17)" />
+        <module name="shopapp (5)" />
+        <module name="shopapp (19)" />
+        <module name="shopapp (7)" />
+        <module name="shopapp (9)" />
+        <module name="shopapp (1)" />
+        <module name="shopapp" />
+        <module name="shopapp (3)" />
+        <module name="shopapp (20)" />
+        <module name="shopapp (10)" />
+        <module name="shopapp (22)" />
+        <module name="shopapp (12)" />
+        <module name="shopapp (24)" />
+        <module name="shopapp (14)" />
+        <module name="shopapp (26)" />
+        <module name="shopapp (16)" />
+        <module name="shopapp (28)" />
+        <module name="shopapp (6)" />
+        <module name="shopapp (18)" />
+        <module name="shopapp (8)" />
+        <module name="shopapp (2)" />
+        <module name="shopapp (4)" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="shopapp" options="-parameters" />
+      <module name="shopapp (1)" options="-parameters" />
+      <module name="shopapp (10)" options="-parameters" />
+      <module name="shopapp (11)" options="-parameters" />
+      <module name="shopapp (12)" options="-parameters" />
+      <module name="shopapp (13)" options="-parameters" />
+      <module name="shopapp (14)" options="-parameters" />
+      <module name="shopapp (15)" options="-parameters" />
+      <module name="shopapp (16)" options="-parameters" />
+      <module name="shopapp (17)" options="-parameters" />
+      <module name="shopapp (18)" options="-parameters" />
+      <module name="shopapp (19)" options="-parameters" />
+      <module name="shopapp (2)" options="-parameters" />
+      <module name="shopapp (20)" options="-parameters" />
+      <module name="shopapp (21)" options="-parameters" />
+      <module name="shopapp (22)" options="-parameters" />
+      <module name="shopapp (23)" options="-parameters" />
+      <module name="shopapp (24)" options="-parameters" />
+      <module name="shopapp (25)" options="-parameters" />
+      <module name="shopapp (26)" options="-parameters" />
+      <module name="shopapp (27)" options="-parameters" />
+      <module name="shopapp (28)" options="-parameters" />
+      <module name="shopapp (3)" options="-parameters" />
+      <module name="shopapp (4)" options="-parameters" />
+      <module name="shopapp (5)" options="-parameters" />
+      <module name="shopapp (6)" options="-parameters" />
+      <module name="shopapp (7)" options="-parameters" />
+      <module name="shopapp (8)" options="-parameters" />
+      <module name="shopapp (9)" options="-parameters" />
+    </option>
+  </component>
+</project>

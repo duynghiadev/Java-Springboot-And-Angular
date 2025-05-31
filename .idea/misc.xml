@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/shopapp-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend01/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend02/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend03/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend04/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend05/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend06/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend07/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend08/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend09/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-10/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-11/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-12/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-13/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-14/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-15/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-16/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-17/shopapp-backend/shopapp/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-18/shopapp-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-19/shopapp-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-20/shopapp-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-21/shopapp-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-22/shopapp-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-23/shopapp-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-24/shopapp-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-25/shopapp-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-26/shopapp-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-27/shopapp-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Viết ứng dụng bán hàng với Java SpringbootAPI và Angular/shopapp-backend/shopapp-backend-28/shopapp-backend/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
